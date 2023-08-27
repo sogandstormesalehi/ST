@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[35]:
-
-
 import functools
 import os
 from matplotlib import gridspec
@@ -12,9 +6,6 @@ import numpy as np
 import tensorflow as tf
 import tensorflow_hub as hub
 import time
-
-
-# In[ ]:
 
 
 def crop_center(image):
@@ -50,9 +41,6 @@ def show_n(images, titles=('',)):
     plt.show()
 
 
-# In[ ]:
-
-
 content_image_url = 'https://i.pinimg.com/564x/5f/7a/ae/5f7aae33c114ef44410febb08e683b7a.jpg' 
 style_image_url = 'https://i.pinimg.com/564x/96/9b/39/969b3960fb339259530026a44974a676.jpg'
 output_image_size = 384 
@@ -63,10 +51,8 @@ style_image = load_image(style_image_url, style_img_size)
 style_image = tf.nn.avg_pool(style_image, ksize=[3,3], strides=[1,1], padding='VALID')
 
 
-# In[34]:
 
 
-start = time.time()
 hub_handle = 'https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2'
 hub_module = hub.load(hub_handle)
 outputs = hub_module(content_image, style_image)
@@ -74,18 +60,3 @@ stylized_image = outputs[0]
 outputs = hub_module(tf.constant(content_image), tf.constant(style_image))
 stylized_image = outputs[0]
 show_n([content_image, style_image, stylized_image], titles=['content', 'style', 'transfered'])
-end = time.time()
-end-start
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
